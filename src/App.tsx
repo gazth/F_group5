@@ -34,7 +34,7 @@ function App() {
       {/* Instructions */}
       <div className="absolute top-4 left-4 text-white bg-black/50 p-4 rounded-lg">
         <h2 className="text-xl font-bold mb-2">Controls</h2>
-        <p>Use W, S, A, D keys to move</p>
+        <p>Use W, A, S, D keys to move</p>
       </div>
 
       {/* Pixel Character */}
