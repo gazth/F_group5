@@ -4,7 +4,7 @@ function App() {
   const [position, setPosition] = useState({ x: 50, y: 50 });
   const [direction, setDirection] = useState('right');
   const speed = 10;
-  const pressedKeys = useRef(new Set<string>());
+  const pressedKeys = useRef(new Set<string>())
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -68,7 +68,7 @@ function App() {
           transform: direction === 'left' ? 'scaleX(-1)' : 'none'
         }}
       >
-        <img 
+        <img  
           src="https://raw.githubusercontent.com/pixijs/pixijs/dev/examples/assets/bunny.png" 
           alt="Pixel Character"
           className="w-full h-full object-contain"
