@@ -1,4 +1,3 @@
-// src/components/Player.tsx
 import React, { useEffect, useRef, useState } from "react";
 import useRealtimeDatabase from "../hooks/useRealtimeDatabase";
 
@@ -85,40 +84,42 @@ const Player: React.FC<PlayerProps> = ({ playerId }) => {
   );
 };
 
-export default Player;
-
-
-
-
 interface Player {
   id: string;
-  x: number
-  y: number
+  x: number;
+  y: number;
 }
 
 interface NewPlayerProps {
   currentPlayerId: string;
-  updatePosition: (x: number, y: number) => Promise<void>
-  player: Player,
-  players: Player[]
+  updatePosition: (x: number, y: number) => Promise<void>;
+  player: Player;
+  players: Player[];
 }
 
-export const NewPlayer: React.FC<NewPlayerProps> = ({ player, currentPlayerId, updatePosition, players }) => {
+export const NewPlayer: React.FC<NewPlayerProps> = ({
+  player,
+  currentPlayerId,
+  updatePosition,
+  players,
+}) => {
   const position = {
     x: player.x,
-    y: player.y
-  }
+    y: player.y,
+  };
 
-  const otherPlayer = players.find((playerEl) => playerEl.id !==  player.id) as Player;
-  console.log()
-  // const distance = Math.sqrt((180 - 250)*(180 - 250) + (290 - 100)*(290 - 100));
-  const distance = Math.sqrt((player.x - otherPlayer.x)*(player.x - otherPlayer.x) + (player.y - otherPlayer.y)*(player.y - otherPlayer.y));
+  const otherPlayer = players.find(
+    (playerEl) => playerEl.id !== player.id
+  ) as Player;
+
+  const distance =
+    Math.sqrt(
+      (player.x - otherPlayer.x) * (player.x - otherPlayer.x) +
+        (player.y - otherPlayer.y) * (player.y - otherPlayer.y)
+    ) || 0;
+
   const near = distance <= 100;
-  if(player.id!==currentPlayerId){
-  console.log(distance)
-  console.log(`other`, otherPlayer)
-  console.log(`my`, player)
-  }
+
   const [direction, setDirection] = useState("right");
   const speed = 10;
   const pressedKeys = useRef(new Set<string>());
@@ -161,10 +162,9 @@ export const NewPlayer: React.FC<NewPlayerProps> = ({ player, currentPlayerId, u
       }
 
       if (newX !== position.x || newY !== position.y) {
-        if(currentPlayerId === player.id) {
+        if (currentPlayerId === player.id) {
           updatePosition(newX, newY);
         }
-       
       }
     };
 
@@ -188,8 +188,8 @@ export const NewPlayer: React.FC<NewPlayerProps> = ({ player, currentPlayerId, u
         top: `${position.y}px`,
         transition: "all 0.1s ease-out",
         transform: direction === "left" ? "scaleX(-1)" : "none",
-        backgroundColor: near ? `red` : 'blue',
-        padding: 8
+        backgroundColor: near ? `red` : "blue",
+        padding: 8,
       }}
     >
       <img
@@ -200,3 +200,5 @@ export const NewPlayer: React.FC<NewPlayerProps> = ({ player, currentPlayerId, u
     </div>
   );
 };
+
+export default Player;
