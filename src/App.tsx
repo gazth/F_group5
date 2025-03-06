@@ -6,7 +6,7 @@ function App() {
   const [messages, setMessages] = useState<string[]>([]); // State for chat messages
   const [newMessage, setNewMessage] = useState<string>(''); // State for new message input
   const speed = 10;
-  const pressedKeys = useRef(new Set<string>());
+  const pressedKeys = useRef(new Set<string>())
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -82,8 +82,9 @@ function App() {
           transform: direction === 'left' ? 'scaleX(-1)' : 'none',
         }}
       >
-        <img
-          src="https://raw.githubusercontent.com/pixijs/pixijs/dev/examples/assets/bunny.png"
+
+        <img  
+          src="https://raw.githubusercontent.com/pixijs/pixijs/dev/examples/assets/bunny.png" 
           alt="Pixel Character"
           className="w-full h-full object-contain"
         />
