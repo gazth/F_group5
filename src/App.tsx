@@ -1,48 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 function App() {
   const [position, setPosition] = useState({ x: 50, y: 50 });
   const [direction, setDirection] = useState('right');
   const speed = 10;
-  const pressedKeys = useRef(new Set<string>());
-
-  // Enterを押したらチャット表示
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      alert(`${chat}`);
-    }
-  };
+  const pressedKeys = useRef(new Set<string>())
 
   useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      switch(e.key.toLowerCase()) {
-        case 'w':
-          setPosition(prev => ({ ...prev, y: Math.max(0, prev.y - speed) }));
-          break;
-        case 's':
-          setPosition(prev => ({ ...prev, y: Math.min(window.innerHeight - 32, prev.y + speed) }));
-          break;
-        case 'a':
-          setDirection('left');
-          setPosition(prev => ({ ...prev, x: Math.max(0, prev.x - speed) }));
-          break;
-        case 'd':
-          setDirection('right');
-          setPosition(prev => ({ ...prev, x: Math.min(window.innerWidth - 32, prev.x + speed) }));
-          break;
-      }
+    const handleKeyDown = (e: KeyboardEvent) => {
+      pressedKeys.current.add(e.key.toLowerCase());
     };
 
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
+    const handleKeyUp = (e: KeyboardEvent) => {
+      pressedKeys.current.delete(e.key.toLowerCase());
+    };
+
+    const updatePosition = () => {
+      setPosition(prev => {
+        let newX = prev.x;
+        let newY = prev.y;
+
+        if (pressedKeys.current.has('w') || pressedKeys.current.has('arrowup')) {
+          newY = Math.max(0, prev.y - speed);
+        }
+        if (pressedKeys.current.has('s') || pressedKeys.current.has('arrowdown')) {
+          newY = Math.min(window.innerHeight - 32, prev.y + speed);
+        }
+        if (pressedKeys.current.has('a') || pressedKeys.current.has('arrowleft')) {
+          setDirection('left');
+          newX = Math.max(0, prev.x - speed);
+        }
+        if (pressedKeys.current.has('d') || pressedKeys.current.has('arrowright')) {
+          setDirection('right');
+          newX = Math.min(window.innerWidth - 32, prev.x + speed);
+        }
+
+        return { x: newX, y: newY };
+      });
+    };
+
+    const interval = setInterval(updatePosition, 100); // 定期的にキー状態をチェック
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
   }, []);
 
   return (
     <div className="min-h-screen bg-gray-900 relative overflow-hidden">
       {/* Instructions */}
       <div className="absolute top-4 left-4 text-white bg-black/50 p-4 rounded-lg">
-        <h2 className="text-xl font-bold mb-2">Controls</h2>
-        <p>Use W, S, A, D keys to move</p>
+
       </div>
 
       {/* Pixel Character */}
