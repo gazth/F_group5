@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Player, { NewPlayer } from "./components/Player";
 import useRealtimeDatabase from "./hooks/useRealtimeDatabase";
-import MapImage from './assets/R.png';
+import MapImage from './assets/sprites/R.png';
 
 const App: React.FC = () => {
   const [messages, setMessages] = useState<string[]>([]);
