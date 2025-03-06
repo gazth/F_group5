@@ -4,6 +4,14 @@ function App() {
   const [position, setPosition] = useState({ x: 50, y: 50 });
   const [direction, setDirection] = useState('right');
   const speed = 10;
+  const pressedKeys = useRef(new Set<string>());
+
+  // Enterを押したらチャット表示
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      alert(`${chat}`);
+    }
+  };
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -34,7 +42,7 @@ function App() {
       {/* Instructions */}
       <div className="absolute top-4 left-4 text-white bg-black/50 p-4 rounded-lg">
         <h2 className="text-xl font-bold mb-2">Controls</h2>
-        <p>Use W, A, S, S keys to move</p>
+        <p>Use W, S, A, D keys to move</p>
       </div>
 
       {/* Pixel Character */}
@@ -47,7 +55,7 @@ function App() {
           transform: direction === 'left' ? 'scaleX(-1)' : 'none'
         }}
       >
-        <img 
+        <img  
           src="https://raw.githubusercontent.com/pixijs/pixijs/dev/examples/assets/bunny.png" 
           alt="Pixel Character"
           className="w-full h-full object-contain"
