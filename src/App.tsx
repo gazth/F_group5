@@ -55,6 +55,7 @@ function App() {
     <div className="min-h-screen bg-gray-900 relative overflow-hidden">
       {/* Instructions */}
       <div className="absolute top-4 left-4 text-white bg-black/50 p-4 rounded-lg">
+
       </div>
 
       {/* Pixel Character */}
