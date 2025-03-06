@@ -6,6 +6,7 @@ import { database } from "../firebaseConfig";
 type Position = { x: number; y: number };
 
 const useRealtimeDatabase = (playerId: string) => {
+    const   currentPlayerName = "player1";
   const [position, setPosition] = useState<Position>({ x: 50, y: 50 });
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const useRealtimeDatabase = (playerId: string) => {
       console.error("Error: playerId is undefined");
       return;
     }
-
+    console.log(playerId)
     const playerRef = ref(database, `players/${playerId}`);
 
     try {
