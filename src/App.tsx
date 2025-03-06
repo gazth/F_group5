@@ -82,8 +82,8 @@ function App() {
           transform: direction === 'left' ? 'scaleX(-1)' : 'none',
         }}
       >
-        <img
-          src="https://raw.githubusercontent.com/pixijs/pixijs/dev/examples/assets/bunny.png"
+        <img  
+          src="https://raw.githubusercontent.com/pixijs/pixijs/dev/examples/assets/bunny.png" 
           alt="Pixel Character"
           className="w-full h-full object-contain"
         />
