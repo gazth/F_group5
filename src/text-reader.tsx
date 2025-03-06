@@ -1,29 +1,35 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function TextReader() {
-  const [inputText, setInputText] = useState("")
-  const [outputText, setOutputText] = useState("")
+  const [inputText, setInputText] = useState("");
+  const [outputText, setOutputText] = useState("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInputText(e.target.value)
-  }
+    setInputText(e.target.value);
+  };
 
   const handleProcess = () => {
-    setOutputText(inputText)
-  }
+    setOutputText(inputText);
+  };
 
   const handleClear = () => {
-    setInputText("")
-    setOutputText("")
-  }
+    setInputText("");
+    setOutputText("");
+  };
 
   return (
     <div className="container mx-auto p-4 max-w-3xl">
@@ -64,6 +70,5 @@ export default function TextReader() {
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }
-
